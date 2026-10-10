@@ -1,0 +1,9 @@
+fastapi>=0.115
+uvicorn>=0.30
+scikit-learn>=1.4
+pandas>=2.2
+joblib>=1.4
+streamlit>=1.38
+pydantic>=2.7
+anthropic>=0.34
+openai>=1.40
