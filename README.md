@@ -1,124 +1,134 @@
 # LLM Cost Router
 
-A routing layer that sits in front of LLM APIs, classifies each incoming
-prompt's *complexity*, and sends simple prompts to a cheap model while
-reserving an expensive model for prompts that actually need it — then
-tracks the dollar savings vs. a baseline of always calling the expensive
-model.
+Most LLM apps send every request to their most capable model, even when
+the question is "what's 72°F in Celsius?" That's a lot of money spent on
+prompts a model a fraction of the price would answer just as well.
 
-## Why this project
+This project sits in front of the API and decides, per request, whether a
+prompt actually needs the expensive model. Simple prompts go to **Gemini
+3.1 Flash-Lite**, harder ones go to **Gemini 3.5 Flash**, and every query
+is logged with what it cost and what it *would* have cost if everything
+had gone to the expensive model.
 
-Sending a request to a frontier model when a cheaper model could have
-handled it just as well is wasted spend. This project measures that waste
-and routes around it automatically.
+## Results
 
-## Architecture
+On a held-out set of 30 prompts the classifier never saw during training:
+
+| Metric | Result |
+|---|---|
+| Cost vs. always using the expensive model | **63% lower** |
+| Routing accuracy | **93%** (28/30) |
+| Always-cheap baseline accuracy | 83% (25/30) |
+
+The most interesting finding came from reading the actual answers. Of the
+prompts I originally labeled "complex" that got routed to the cheap model,
+**the cheap model handled 85% of them well**, including a heapsort
+stability proof, a thread-safe LRU cache in Java, and a probability
+problem. It only fell short on two: it misstated what proving P = NP would
+require, and it described an outdated TLS key exchange. That changed how
+I define "complex": by whether the cheap model's answer holds up, not by
+how hard the question sounds.
+
+## How it works
 
 ```
 prompt -> ComplexityClassifier -> Router -> llm_clients -> response
-                |                    |            |
-          (TF-IDF + hand       (threshold +   (OpenAI, or mock
-           features ->          code-prompt     mode with no key)
-           LogisticRegression)  override)
+              |                      |             |
+       TF-IDF + hand-built     threshold +     Gemini (or OpenAI,
+       features -> logistic    code override   or mock mode)
+       regression
                                      |
-                              cost calc -> SQLite -> FastAPI /stats + Streamlit dashboard
+                       cost calc -> SQLite -> /stats API + Streamlit dashboard
 ```
 
-- **data/build_dataset.py**: generates a labeled set of simple vs. complex
-  example prompts into `data/training_prompts.csv`.
-- **complexity_classifier.py**: turns a prompt into features: a TF-IDF
-  vector of the text (words and two-word phrases) plus hand-engineered
-  signals (character length, word count, whether it contains code,
-  phrases like "step by step" / "compare" / "debug", math symbols,
-  sentence count). Also holds the `ComplexityClassifier` class that loads
-  the trained model and returns P(complex) for a prompt.
-- **train_classifier.py**: splits the data into train/test, fits the
-  TF-IDF vectorizer, a `StandardScaler` for the hand features, and a
-  `LogisticRegression`, prints a classification report on the test set,
-  and saves everything to `classifier.joblib`.
-- **router.py**: routes to the expensive model if P(complex) >= 0.5,
-  with one hard override: prompts containing code always go to the
-  expensive model. Then it calls the model, computes cost, and logs it.
-- **llm_clients.py**: wraps the model call. With `GEMINI_API_KEY` in `.env`
-  it calls Gemini 3.1 Flash-Lite (cheap) or Gemini 3.5 Flash (expensive)
-  through Gemini's OpenAI-compatible endpoint. With `OPENAI_API_KEY`
-  instead it calls gpt-4o-mini / gpt-4o. With no key it runs in
-  **mock mode** (fake responses and token counts). Mock rows are flagged
-  in the database.
-- **pricing_config.py**: loads `.env`, picks the provider, and holds
-  per-model $/1K-token rates (paid-tier list prices) and the cost formula.
-- **db.py**: SQLite logging of every query: complexity score, route,
-  model, tokens, actual cost, baseline cost, and whether it was mocked.
-- **main.py**: FastAPI app exposing `POST /query`, `GET /stats`
-  (`?real_only=true` excludes mock rows), and `GET /health`.
-- **dashboard.py**: Streamlit dashboard reading from the same SQLite DB:
-  summary metrics, cumulative actual-vs-baseline cost over time, route
-  distribution, and a recent-query log. Mock rows are hidden by default.
+1. **Classify.** The prompt is turned into features: a TF-IDF vector
+   (words and two-word phrases) plus a few hand-built signals: length,
+   word count, whether it contains code, reasoning phrases like "step by
+   step" or "compare", math symbols, and sentence count. A logistic
+   regression model turns those into P(complex).
+2. **Route.** If P(complex) ≥ 0.5 the prompt goes to the expensive model.
+   Prompts containing real code (a code fence, a function or class
+   definition, an import line, SQL) always go to the expensive model.
+3. **Call and log.** The router calls the chosen model, prices the
+   request using the token counts the API returns, and logs it to SQLite
+   next to the cost of sending the same tokens to the expensive model.
+4. **Show.** A Streamlit dashboard plots cumulative actual vs. baseline
+   spend, the cheap/expensive split, and recent queries.
+
+## Files
+
+| File | What it does |
+|---|---|
+| `complexity_classifier.py` | Feature extraction and the `ComplexityClassifier` class |
+| `train_classifier.py` | Train/test split, fits TF-IDF + scaler + logistic regression, saves `classifier.joblib` |
+| `router.py` | Routing decision, model call, cost calculation, logging |
+| `llm_clients.py` | Calls Gemini through its OpenAI-compatible endpoint (or OpenAI, or mock mode with no key) |
+| `pricing_config.py` | Loads `.env`, picks the provider, holds per-model prices |
+| `db.py` | SQLite logging and stats queries |
+| `main.py` | FastAPI app: `POST /query`, `GET /stats`, `GET /health` |
+| `dashboard.py` | Streamlit dashboard |
+| `send_prompts.py` | Sends a CSV of prompts to the API, scores routing against labels, saves every answer |
+| `data/training_prompts.csv` | 52 labeled training prompts |
+| `data/test_prompts.csv` | 30 held-out test prompts |
+| `data/build_dataset.py` | Generates synthetic template prompts for a quick demo run |
 
 ## Running it
 
 ```bash
-cd llm-router
 pip install -r requirements.txt
 
-# 1. Train the classifier (generates the dataset first if missing)
-python train_classifier.py
+# Add your key (a free Gemini key works: https://aistudio.google.com/apikey)
+cp .env.example .env        # then paste your key into .env
 
-# 2. Start the API (mock mode unless OPENAI_API_KEY is set)
-uvicorn main:app --reload
-
-# 3. In a second terminal, start the dashboard
-streamlit run dashboard.py
+python train_classifier.py  # train the classifier
+uvicorn main:app --reload   # start the API at http://127.0.0.1:8000
+streamlit run dashboard.py  # in a second terminal
 ```
 
-Send a test query:
+Try a request at **http://127.0.0.1:8000/docs**, or with curl:
+
 ```bash
-curl -X POST http://localhost:8000/query \
+curl -X POST http://127.0.0.1:8000/query \
   -H "Content-Type: application/json" \
   -d '{"prompt": "What is the capital of France?"}'
-
-curl -X POST http://localhost:8000/query \
-  -H "Content-Type: application/json" \
-  -d '{"prompt": "Write a Python function that implements Dijkstras algorithm and explain the time complexity step by step, comparing it to Bellman-Ford."}'
 ```
 
-To use real models, copy `.env.example` to `.env` and paste a key:
+To run the whole test set and see which prompts get misrouted:
+
+```bash
+python send_prompts.py data/test_prompts.csv
 ```
-GEMINI_API_KEY=your-key-here
-```
-Then restart uvicorn. `.env` is in `.gitignore`, so the key never gets committed.
-If you previously ran in mock mode, either delete `router_log.db` or keep
-the dashboard's "Real API calls only" toggle on, so fake rows don't mix
-into your numbers.
+
+Every answer is saved to `results/` so you can read what each model
+actually said.
+
+With no API key the app runs in **mock mode** with fake responses, so you
+can try the pipeline for free. Mock rows are flagged in the database and
+hidden on the dashboard by default.
 
 ## How cost is measured
 
-Costs are computed at each provider's **paid-tier list prices**. On
-Gemini's free tier the actual bill is $0, so the numbers show what the
-same traffic would cost at paid rates.
+Each query is priced at the provider's paid-tier rates using the real
+token counts returned by the API. The baseline prices the same tokens at
+the expensive model's rate. Larger models usually write longer answers,
+so this baseline understates what the expensive model would really cost,
+which makes the 63% figure a conservative one.
 
-For each query, `actual_cost` uses the routed model's price and
-`baseline_cost` uses the expensive model's price for the **same token
-counts**. That assumes the expensive model would have produced an answer
-of the same length. In practice larger models often write longer answers,
-so the reported savings are likely conservative.
+## Limitations
 
-## Known limitations
+- The training and test sets are small (52 and 30 prompts), so accuracy
+  numbers move noticeably with each prompt.
+- Training labels were based on how hard a prompt sounds; test labels are
+  based on answer quality. Relabeling the training set the same way is
+  the obvious next step.
+- If a real API call fails (bad key, rate limit), the request falls back
+  to a mock reply and is logged as mocked so it never counts toward the
+  real numbers.
 
-- The bundled training data is template-generated, so test accuracy on it
-  is not meaningful. Real accuracy needs hand-labeled prompts.
-- `estimate_tokens` (words x 1.3) is only used in mock mode; real mode
-  uses the token counts the API returns.
-- If a real API call fails (bad key, free-tier rate limit), the request
-  falls back to a mock reply and is logged with `mocked = 1`.
-- Gemini 3.x Flash models "think" before answering. Whether thinking tokens
-  show up in the reported output token count via the OpenAI-compatible
-  endpoint should be checked against Google's usage dashboard.
+## What I'd do next
 
-## Possible extensions
-
-- Semantic caching of repeated/similar queries.
-- A feedback endpoint so mis-routed queries get added back to the
-  training set.
-- Sentence-embedding features instead of TF-IDF.
-- Exact token counting with `tiktoken`.
+- Relabel training data by answer quality and grow both datasets.
+- Use `class_weight="balanced"` to offset the simple/complex imbalance.
+- Try sentence embeddings instead of TF-IDF.
+- Add a feedback endpoint so misrouted prompts flow back into training.
+- Cache repeated or near-duplicate prompts.
