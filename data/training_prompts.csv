@@ -1,129 +1,87 @@
-prompt,label
-What is the capital of Canada?,simple
-"Compare Kafka and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
-"Compare Kafka and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
-"Compare React and Vue for an analytics pipeline, and recommend one with tradeoffs.",complex
-How many inches are in a foot?,simple
-Translate 'thank you' into French.,simple
-Translate 'see you later' into French.,simple
-Translate 'where is the library' into Spanish.,simple
-"Compare React and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
-Translate 'good morning' into French.,simple
-Refactor this C++ code to be more maintainable and explain each change.,complex
-Design a news feed that can handle global traffic. Walk me through the architecture.,complex
-"Compare PostgreSQL and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
-What is the capital of Brazil?,simple
-"Compare React and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
-Design a rate limiter that can handle 100k requests per second. Walk me through the architecture.,complex
-"Explain step by step how DNS resolution works, including the main failure modes.",complex
-"Explain step by step how a transformer's attention works, including the main failure modes.",complex
-Optimize a slow nested-loop lookup and explain why your approach is faster.,complex
-"Compare REST and Vue for an analytics pipeline, and recommend one with tradeoffs.",complex
-Translate 'where is the library' into Hindi.,simple
-"Compare REST and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
-How many ounces are in a pound?,simple
-"Compare Kafka and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
-"Compare Kafka and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
-Fix the spelling in this sentence: 'I recieved the pakage',simple
-Design a rate limiter that can handle 10 million daily users. Walk me through the architecture.,complex
-Give me a synonym for 'resilient'.,simple
-Refactor this Java code to be more maintainable and explain each change.,complex
-Define the word 'happy'.,simple
-"Compare PostgreSQL and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
-"Compare Kafka and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
-Design a distributed cache that can handle 10 million daily users. Walk me through the architecture.,complex
-Design a rate limiter that can handle global traffic. Walk me through the architecture.,complex
-Write a Python function that implements merge sort and analyze its time complexity.,complex
-"Compare React and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
-"Compare PostgreSQL and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
-Translate 'see you later' into Hindi.,simple
-Define the word 'ephemeral'.,simple
-Give me a synonym for 'verbose'.,simple
-Write a Python function that implements an LRU cache and analyze its time complexity.,complex
-How many centimeters are in a meter?,simple
-"Compare REST and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
-Refactor this JavaScript code to be more maintainable and explain each change.,complex
-Translate 'where is the library' into German.,simple
-"Compare REST and RabbitMQ for a social media backend, and recommend one with tradeoffs.",complex
-"Debug this code and explain the fix:
-```python
-def fib(n):
-    return fib(n-1) + fib(n-2)
-```",complex
-Design a distributed cache that can handle global traffic. Walk me through the architecture.,complex
-"Compare REST and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
-Give me a synonym for 'quick'.,simple
-What year did the moon landing happen?,simple
-Translate 'where is the library' into French.,simple
-Derive the closed-form solution to linear regression from first principles.,complex
-Who wrote The Great Gatsby?,simple
-Define the word 'resilient'.,simple
-"Compare Kafka and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
-"Compare PostgreSQL and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
-Design a news feed that can handle 100k requests per second. Walk me through the architecture.,complex
-Design a URL shortener that can handle global traffic. Walk me through the architecture.,complex
-Optimize a SQL query that joins three large tables and explain why your approach is faster.,complex
-"Compare React and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
-Give me a synonym for 'ephemeral'.,simple
-"Debug this code and explain the fix:
-```python
-def avg(xs):
-    return sum(xs) / len(xs)
-```",complex
-"Compare REST and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
-Translate 'see you later' into Spanish.,simple
-"Compare REST and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
-Write a Python function that implements A* search and analyze its time complexity.,complex
-"Compare REST and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
-Give me a synonym for 'happy'.,simple
-"Explain step by step how TCP congestion control works, including the main failure modes.",complex
-"Compare React and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
-Who wrote Pride and Prejudice?,simple
-"Compare PostgreSQL and RabbitMQ for a social media backend, and recommend one with tradeoffs.",complex
-"Compare Kafka and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
-Who wrote Hamlet?,simple
-Design a distributed cache that can handle 100k requests per second. Walk me through the architecture.,complex
-"Compare REST and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
-Define the word 'quick'.,simple
-Translate 'good morning' into Spanish.,simple
-What is the capital of Kenya?,simple
-"Compare Kafka and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
-"Compare PostgreSQL and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
-Translate 'see you later' into German.,simple
-Fix the spelling in this sentence: 'Its definately raining',simple
-Translate 'thank you' into Spanish.,simple
-Translate 'thank you' into German.,simple
-Translate 'good morning' into Hindi.,simple
-Who wrote 1984?,simple
-Fix the spelling in this sentence: 'Thier dog is realy cute',simple
-"Compare Kafka and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
-What is the capital of Japan?,simple
-"Compare PostgreSQL and Vue for a social media backend, and recommend one with tradeoffs.",complex
-Translate 'thank you' into Hindi.,simple
-"Compare React and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
-"Compare PostgreSQL and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
-"Compare REST and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
-Design a URL shortener that can handle 100k requests per second. Walk me through the architecture.,complex
-What is the capital of France?,simple
-How many minutes are in an hour?,simple
-Derive the gradient of the logistic regression loss from first principles.,complex
-"Compare REST and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
-What year did the fall of the Berlin Wall happen?,simple
-What year did the first iPhone release happen?,simple
-Write a Python function that implements Dijkstra's algorithm and analyze its time complexity.,complex
-Define the word 'verbose'.,simple
-Design a URL shortener that can handle 10 million daily users. Walk me through the architecture.,complex
-"Explain step by step how garbage collection in Java works, including the main failure modes.",complex
-"Explain step by step how Raft consensus works, including the main failure modes.",complex
-"Debug this code and explain the fix:
-```python
-for i in range(len(items)):
-    items.remove(items[i])
-```",complex
-Design a news feed that can handle 10 million daily users. Walk me through the architecture.,complex
-Write a Python function that implements a trie and analyze its time complexity.,complex
-What is the capital of Italy?,simple
-"Compare React and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
-Translate 'good morning' into German.,simple
-"Compare PostgreSQL and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
-Derive the formula for variance from first principles.,complex
+"prompt","label"
+"What's the difference between a virus and a bacterium?","simple"
+"Refactor this Python function to handle large files efficiently without loading the entire file into memory. Preserve its current behavior, explain the time and space complexity, and include tests for empty files, malformed input, and files larger than available RAM:
+
+def process_file(path):
+    with open(path) as f:
+        data = f.readlines()
+    return [line.strip().upper() for line in data if line.strip()]","complex"
+"Convert 145 miles to kilometers.","simple"
+"proof there are infinitely many prime numbers","simple"
+"Fix the typos in this paragraph without changing the wording or tone: I recieved your mesage yesterday and wanted to let you know that I definately agree with the proposed changes. I think the new schedual looks great, although there are a few minor details that still need to be adressed before we can finalize everything. Please let me know if theres anything else you need from me.","simple"
+"What does APR mean on a credit card?","simple"
+"Plan a 10-day trip through Japan for two people with a $3,500 budget excluding flights. We enjoy food, hiking, history, and smaller towns more than nightlife. Include transportation between destinations, estimated daily expenses, accommodation suggestions, and a realistic itinerary that avoids spending the entire trip traveling.","complex"
+"Translate 'I hope you have a wonderful day' into French.","simple"
+"Why does this SQL query return duplicate customers? I need one row per customer, but I also need their most recent order and the total amount they've spent:
+SELECT customers.*, orders.order_date, orders.amount FROM customers JOIN orders ON customers.id = orders.customer_id;","complex"
+"How many tablespoons are in a cup?","simple"
+"Write a professional but friendly email asking my manager if I can move our Friday meeting to Monday because I have a scheduling conflict.","simple"
+"Build a distributed job-processing system for a service that receives 50,000 tasks per minute. It must support retries, exactly-once business effects, task prioritization, worker failures, rate limits, and graceful deployment. Describe the architecture, database schema, failure modes, and tradeoffs.","complex"
+"What is the capital of Portugal?","simple"
+"i keep getting this error when i run my react app: Cannot read properties of undefined (reading 'map'). what does it mean?","simple"
+"Determine whether the following argument is logically valid, and if it is not, provide a counterexample: All mammals are animals. Some animals are aquatic. Therefore, some mammals are aquatic.","simple"
+"Make this sentence shorter: Due to the fact that we are currently experiencing a significant amount of unexpected delays, we will unfortunately be unable to deliver the requested materials by the originally agreed-upon deadline.","simple"
+"What temperature should chicken breast reach internally to be safe to eat?","simple"
+"Compare renting versus buying a home over a 10-year period for someone earning $95,000 annually. Account for mortgage interest, property taxes, maintenance, opportunity cost of the down payment, rent increases, investment returns, and transaction costs. State your assumptions and explain when each option makes more financial sense.","complex"
+"Sort these names alphabetically: Maria, James, Olivia, Benjamin, Sophia.","simple"
+"Explain why the following C++ code compiles but produces unexpected behavior. Identify the bug, fix it, and explain object lifetime and undefined behavior:
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+const string& getName() {
+    string name = ""Alex"";
+    return name;
+}
+
+int main() {
+    cout << getName() << endl;
+}","complex"
+"What is the boiling point of water at sea level?","simple"
+"Draft a 700-word cover letter for a software engineering internship at a small startup. Connect my experience building a REST API with PostgreSQL and Express to the company's emphasis on ownership and working across the stack. Avoid generic claims and make it sound natural rather than overly formal.","complex"
+"How do I say thank you in Japanese?","simple"
+"Find the equilibrium price and quantity for demand Qd = 120 - 3P and supply Qs = 20 + 2P. Show the calculations.","simple"
+"format these into a numbered list: apples, oranges, bananas, grapes, pears","simple"
+"An investment portfolio loses 20% of its value in year one and gains 25% in year two. Is it back to its original value? Show why.","simple"
+"Create a Python script that monitors a folder for new CSV files, validates their schemas, processes valid files, and moves invalid files into a separate directory. It should handle duplicate filenames, interrupted processing, concurrent file arrivals, and logging. Include a sensible project structure and tests.","complex"
+"What is the difference between weather and climate?","simple"
+"i have eggs, rice, soy sauce, frozen peas, garlic, and onions. give me a quick fried rice recipe","simple"
+"Design an experiment to determine whether a new study technique actually improves exam performance. Account for selection bias, confounding variables, sample size, randomization, statistical significance, and practical significance. Explain how you would interpret ambiguous results.","complex"
+"Rewrite this message to sound more polite: Send me the report today because I need it before the meeting.","simple"
+"How many grams are in 2.5 kilograms?","simple"
+"Given the dataset below, identify the strongest predictors of customer churn, explain potential leakage and multicollinearity, handle missing values, and propose a validation strategy that avoids temporal leakage:
+
+customer_id,tenure,monthly_charges,support_calls,churn
+1,2,90,8,yes
+2,24,45,1,no
+3,6,75,5,yes
+4,36,40,0,no
+5,12,65,,no","complex"
+"What's a good substitute for buttermilk in pancakes?","simple"
+"Write a SQL query to find employees who earn more than their department's average salary.","simple"
+"Summarize the main causes of the French Revolution in three bullet points.","simple"
+"A company has declining revenue despite increasing website traffic. Develop a diagnostic framework to identify whether the problem is acquisition quality, conversion, pricing, retention, or product-market fit. Specify which metrics and experiments you would examine, and how you would prioritize potential interventions with limited engineering resources.","complex"
+"Translate 'Where is the nearest train station?' into Spanish.","simple"
+"Is it normal for a laptop battery to lose capacity over time?","simple"
+"Show that the square root of 2 is irrational.","simple"
+"Create a weekly meal plan for one person with a $65 grocery budget. I don't eat seafood, have access to a microwave and stovetop, and want meals that are high in protein. Reuse ingredients to minimize waste and include a consolidated shopping list with approximate quantities.","complex"
+"What is the difference between a debit card and a credit card?","simple"
+"Review this JavaScript function for race conditions and incorrect state updates. Rewrite it so multiple requests can run concurrently without stale results overwriting newer ones. Explain your approach and include edge-case tests:
+
+let currentResult = null;
+async function search(query) {
+  const response = await fetch('/api/search?q=' + query);
+  const data = await response.json();
+  currentResult = data;
+  return currentResult;
+}","complex"
+"Make the following text lowercase: THE MEETING HAS BEEN RESCHEDULED TO THURSDAY AFTERNOON.","simple"
+"Calculate the monthly payment on a $280,000 mortgage with a 6.5% annual interest rate over 30 years, excluding taxes and insurance.","simple"
+"Develop a mathematical proof that there are infinitely many primes congruent to 3 modulo 4. You may use elementary number theory, but state and justify every important step.","complex"
+"What are three ways to reduce food waste at home?","simple"
+"Help me decide between accepting a $90,000 job at a large established company and an $82,000 offer at an early-stage startup. The startup offers equity, broader responsibilities, and potentially faster career growth, while the larger company offers stability and mentorship. Build a decision framework that accounts for risk, financial value, learning opportunities, career trajectory, and uncertainty around startup equity.","complex"
+"Write a Python function that checks whether a string is a palindrome.","simple"
+"Create a migration plan for moving a production PostgreSQL database from a single server to a highly available setup with minimal downtime. Include replication, backups, failover, connection pooling, rollback procedures, monitoring, and a strategy for verifying data consistency before switching traffic.","complex"
+"what time is it in Tokyo when its 9am in New York during daylight saving time?","simple"
+"Convert the following notes into a concise meeting summary with action items: We discussed the website redesign. Marketing wants the landing page ready by March 10. Engineering says the payment integration may take another two weeks. Sarah will send updated mockups by Friday. The team agreed to postpone the mobile redesign until after launch. We also need to decide who owns analytics tracking. The next meeting is scheduled for Wednesday.","simple"
