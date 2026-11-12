@@ -17,7 +17,18 @@ from scipy.sparse import hstack, csr_matrix
 
 MODEL_PATH = Path(__file__).parent / "classifier.joblib"
 
-CODE_BLOCK_RE = re.compile(r"```|def |class |import |SELECT |function\(")
+# Detects actual code, not English words like "class" or "import".
+# Each alternative requires code *syntax* around the keyword:
+CODE_BLOCK_RE = re.compile(
+    r"```"                                   # markdown code fence
+    r"|\bdef\s+\w+\s*\("                     # Python function: def name(
+    r"|\bclass\s+\w+\s*[:(]"                 # Python class: class Name: / class Name(
+    r"|^\s*(?:from\s+[\w.]+\s+)?import\s+[\w.]+(?:\s+as\s+\w+)?(?:\s*,\s*[\w.]+)*\s*$"  # a line that is only an import
+    r"|\bSELECT\b.+\bFROM\b"                 # SQL (uppercase only, so "select ... from" in English doesn't count)
+    r"|\bfunction\s*\w*\s*\([^)]*\)\s*\{"    # JS function: function name(...) {
+    r"|=>\s*\{",                             # JS arrow function: => {
+    re.MULTILINE,
+)
 STEP_WORDS_RE = re.compile(
     r"\bstep by step\b|\bwalk me through\b|\bexplain how\b|\bcompare\b|"
     r"\bdesign\b|\bderive\b|\brefactor\b|\boptimi[sz]e\b|\bdebug\b",

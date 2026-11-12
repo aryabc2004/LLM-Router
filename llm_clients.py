@@ -1,23 +1,31 @@
 """
 Wraps the actual model call for each route ("cheap" / "expensive").
 
-If OPENAI_API_KEY is set, cheap/expensive both call OpenAI models.
-If no key is set, falls back to MOCK MODE: generates a plausible fake
-response and token counts, so the whole pipeline (router, cost tracker,
-dashboard) works end-to-end with zero API cost. This is what lets you
-demo the project without paying for API calls.
+Keys are read from .env (see .env.example):
+- GEMINI_API_KEY set: calls Gemini through its OpenAI-compatible endpoint,
+  so the same `openai` library works with only a different base_url.
+- else OPENAI_API_KEY set: calls OpenAI.
+- else MOCK MODE: generates a plausible fake response and token counts,
+  so the whole pipeline (router, cost tracker, dashboard) works end-to-end
+  with zero API cost.
 """
 import os
 import random
-from pricing_config import PRICING, estimate_tokens
+# Importing pricing_config first also runs load_dotenv(), so the keys
+# from .env are in os.environ before we check for them below.
+from pricing_config import PRICING, PROVIDER, estimate_tokens
+
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
 _openai_client = None
-if os.environ.get("OPENAI_API_KEY"):
-    try:
-        from openai import OpenAI
+try:
+    from openai import OpenAI
+    if PROVIDER == "gemini" and os.environ.get("GEMINI_API_KEY"):
+        _openai_client = OpenAI(api_key=os.environ["GEMINI_API_KEY"], base_url=GEMINI_BASE_URL)
+    elif PROVIDER == "openai" and os.environ.get("OPENAI_API_KEY"):
         _openai_client = OpenAI()
-    except ImportError:
-        _openai_client = None
+except ImportError:
+    _openai_client = None
 
 
 def _mock_response(prompt: str, route: str) -> tuple[str, int, int]:

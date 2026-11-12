@@ -27,6 +27,11 @@ def get_conn():
     return conn
 
 
+def _where(real_only: bool) -> str:
+    # mocked = 0 means the row came from a real API call.
+    return "WHERE mocked = 0" if real_only else ""
+
+
 def log_query(prompt, complexity_score, route, model_used,
               input_tokens, output_tokens, actual_cost, baseline_cost, mocked):
     conn = get_conn()
@@ -52,15 +57,16 @@ def log_query(prompt, complexity_score, route, model_used,
     conn.close()
 
 
-def get_stats():
+def get_stats(real_only: bool = False):
     conn = get_conn()
     cur = conn.execute(
-        """SELECT COUNT(*), COALESCE(SUM(actual_cost),0), COALESCE(SUM(baseline_cost),0),
-                  SUM(CASE WHEN route='cheap' THEN 1 ELSE 0 END),
-                  SUM(CASE WHEN route='expensive' THEN 1 ELSE 0 END)
-           FROM queries"""
+        f"""SELECT COUNT(*), COALESCE(SUM(actual_cost),0), COALESCE(SUM(baseline_cost),0),
+                   SUM(CASE WHEN route='cheap' THEN 1 ELSE 0 END),
+                   SUM(CASE WHEN route='expensive' THEN 1 ELSE 0 END)
+            FROM queries {_where(real_only)}"""
     )
     total, actual, baseline, n_cheap, n_expensive = cur.fetchone()
+    n_mocked = conn.execute("SELECT COUNT(*) FROM queries WHERE mocked = 1").fetchone()[0]
     conn.close()
     savings = baseline - actual
     pct_savings = (savings / baseline * 100) if baseline > 0 else 0.0
@@ -72,16 +78,31 @@ def get_stats():
         "pct_savings": pct_savings,
         "n_cheap": n_cheap or 0,
         "n_expensive": n_expensive or 0,
+        "n_mocked_in_db": n_mocked,
+        "real_only": real_only,
     }
 
 
-def get_recent(limit=25):
+def get_recent(limit=25, real_only: bool = False):
     conn = get_conn()
     cur = conn.execute(
-        """SELECT timestamp, prompt_preview, complexity_score, route, model_used,
-                  actual_cost, baseline_cost
-           FROM queries ORDER BY id DESC LIMIT ?""",
+        f"""SELECT timestamp, prompt_preview, complexity_score, route, model_used,
+                   actual_cost, baseline_cost, mocked
+            FROM queries {_where(real_only)} ORDER BY id DESC LIMIT ?""",
         (limit,),
+    )
+    rows = cur.fetchall()
+    conn.close()
+    return rows
+
+
+def get_cost_series(real_only: bool = False):
+    """Every query's (timestamp, actual_cost, baseline_cost), oldest first,
+    so the dashboard can plot cumulative spend over time."""
+    conn = get_conn()
+    cur = conn.execute(
+        f"""SELECT timestamp, actual_cost, baseline_cost
+            FROM queries {_where(real_only)} ORDER BY id ASC"""
     )
     rows = cur.fetchall()
     conn.close()

@@ -16,7 +16,7 @@ from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
 from scipy.sparse import hstack, csr_matrix
 
-from complexity_classifier import ComplexityClassifier, hand_features
+from complexity_classifier import ComplexityClassifier, hand_features, MODEL_PATH
 
 DATA_PATH = Path(__file__).parent / "data" / "training_prompts.csv"
 
@@ -50,7 +50,7 @@ def main():
 
     clf = ComplexityClassifier(vectorizer=vectorizer, scaler=scaler, model=model)
     clf.save()
-    print(f"Saved trained classifier to {clf.MODEL_PATH if hasattr(clf, 'MODEL_PATH') else 'classifier.joblib'}")
+    print(f"Saved trained classifier to {MODEL_PATH}")
 
 
 if __name__ == "__main__":

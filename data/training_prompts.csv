@@ -1,0 +1,129 @@
+prompt,label
+What is the capital of Canada?,simple
+"Compare Kafka and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
+"Compare Kafka and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
+"Compare React and Vue for an analytics pipeline, and recommend one with tradeoffs.",complex
+How many inches are in a foot?,simple
+Translate 'thank you' into French.,simple
+Translate 'see you later' into French.,simple
+Translate 'where is the library' into Spanish.,simple
+"Compare React and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
+Translate 'good morning' into French.,simple
+Refactor this C++ code to be more maintainable and explain each change.,complex
+Design a news feed that can handle global traffic. Walk me through the architecture.,complex
+"Compare PostgreSQL and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
+What is the capital of Brazil?,simple
+"Compare React and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
+Design a rate limiter that can handle 100k requests per second. Walk me through the architecture.,complex
+"Explain step by step how DNS resolution works, including the main failure modes.",complex
+"Explain step by step how a transformer's attention works, including the main failure modes.",complex
+Optimize a slow nested-loop lookup and explain why your approach is faster.,complex
+"Compare REST and Vue for an analytics pipeline, and recommend one with tradeoffs.",complex
+Translate 'where is the library' into Hindi.,simple
+"Compare REST and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
+How many ounces are in a pound?,simple
+"Compare Kafka and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
+"Compare Kafka and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
+Fix the spelling in this sentence: 'I recieved the pakage',simple
+Design a rate limiter that can handle 10 million daily users. Walk me through the architecture.,complex
+Give me a synonym for 'resilient'.,simple
+Refactor this Java code to be more maintainable and explain each change.,complex
+Define the word 'happy'.,simple
+"Compare PostgreSQL and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
+"Compare Kafka and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
+Design a distributed cache that can handle 10 million daily users. Walk me through the architecture.,complex
+Design a rate limiter that can handle global traffic. Walk me through the architecture.,complex
+Write a Python function that implements merge sort and analyze its time complexity.,complex
+"Compare React and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
+"Compare PostgreSQL and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
+Translate 'see you later' into Hindi.,simple
+Define the word 'ephemeral'.,simple
+Give me a synonym for 'verbose'.,simple
+Write a Python function that implements an LRU cache and analyze its time complexity.,complex
+How many centimeters are in a meter?,simple
+"Compare REST and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
+Refactor this JavaScript code to be more maintainable and explain each change.,complex
+Translate 'where is the library' into German.,simple
+"Compare REST and RabbitMQ for a social media backend, and recommend one with tradeoffs.",complex
+"Debug this code and explain the fix:
+```python
+def fib(n):
+    return fib(n-1) + fib(n-2)
+```",complex
+Design a distributed cache that can handle global traffic. Walk me through the architecture.,complex
+"Compare REST and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
+Give me a synonym for 'quick'.,simple
+What year did the moon landing happen?,simple
+Translate 'where is the library' into French.,simple
+Derive the closed-form solution to linear regression from first principles.,complex
+Who wrote The Great Gatsby?,simple
+Define the word 'resilient'.,simple
+"Compare Kafka and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
+"Compare PostgreSQL and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
+Design a news feed that can handle 100k requests per second. Walk me through the architecture.,complex
+Design a URL shortener that can handle global traffic. Walk me through the architecture.,complex
+Optimize a SQL query that joins three large tables and explain why your approach is faster.,complex
+"Compare React and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
+Give me a synonym for 'ephemeral'.,simple
+"Debug this code and explain the fix:
+```python
+def avg(xs):
+    return sum(xs) / len(xs)
+```",complex
+"Compare REST and MongoDB for an analytics pipeline, and recommend one with tradeoffs.",complex
+Translate 'see you later' into Spanish.,simple
+"Compare REST and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
+Write a Python function that implements A* search and analyze its time complexity.,complex
+"Compare REST and MongoDB for a real-time chat app, and recommend one with tradeoffs.",complex
+Give me a synonym for 'happy'.,simple
+"Explain step by step how TCP congestion control works, including the main failure modes.",complex
+"Compare React and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
+Who wrote Pride and Prejudice?,simple
+"Compare PostgreSQL and RabbitMQ for a social media backend, and recommend one with tradeoffs.",complex
+"Compare Kafka and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
+Who wrote Hamlet?,simple
+Design a distributed cache that can handle 100k requests per second. Walk me through the architecture.,complex
+"Compare REST and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
+Define the word 'quick'.,simple
+Translate 'good morning' into Spanish.,simple
+What is the capital of Kenya?,simple
+"Compare Kafka and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
+"Compare PostgreSQL and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
+Translate 'see you later' into German.,simple
+Fix the spelling in this sentence: 'Its definately raining',simple
+Translate 'thank you' into Spanish.,simple
+Translate 'thank you' into German.,simple
+Translate 'good morning' into Hindi.,simple
+Who wrote 1984?,simple
+Fix the spelling in this sentence: 'Thier dog is realy cute',simple
+"Compare Kafka and GraphQL for an analytics pipeline, and recommend one with tradeoffs.",complex
+What is the capital of Japan?,simple
+"Compare PostgreSQL and Vue for a social media backend, and recommend one with tradeoffs.",complex
+Translate 'thank you' into Hindi.,simple
+"Compare React and RabbitMQ for a real-time chat app, and recommend one with tradeoffs.",complex
+"Compare PostgreSQL and RabbitMQ for an analytics pipeline, and recommend one with tradeoffs.",complex
+"Compare REST and Vue for a real-time chat app, and recommend one with tradeoffs.",complex
+Design a URL shortener that can handle 100k requests per second. Walk me through the architecture.,complex
+What is the capital of France?,simple
+How many minutes are in an hour?,simple
+Derive the gradient of the logistic regression loss from first principles.,complex
+"Compare REST and GraphQL for a real-time chat app, and recommend one with tradeoffs.",complex
+What year did the fall of the Berlin Wall happen?,simple
+What year did the first iPhone release happen?,simple
+Write a Python function that implements Dijkstra's algorithm and analyze its time complexity.,complex
+Define the word 'verbose'.,simple
+Design a URL shortener that can handle 10 million daily users. Walk me through the architecture.,complex
+"Explain step by step how garbage collection in Java works, including the main failure modes.",complex
+"Explain step by step how Raft consensus works, including the main failure modes.",complex
+"Debug this code and explain the fix:
+```python
+for i in range(len(items)):
+    items.remove(items[i])
+```",complex
+Design a news feed that can handle 10 million daily users. Walk me through the architecture.,complex
+Write a Python function that implements a trie and analyze its time complexity.,complex
+What is the capital of Italy?,simple
+"Compare React and GraphQL for a social media backend, and recommend one with tradeoffs.",complex
+Translate 'good morning' into German.,simple
+"Compare PostgreSQL and MongoDB for a social media backend, and recommend one with tradeoffs.",complex
+Derive the formula for variance from first principles.,complex
